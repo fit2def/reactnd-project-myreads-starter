@@ -1,0 +1,49 @@
+.book {
+  width: 140px;
+}
+
+.book-title,
+.book-authors {
+  font-size: 0.8em;
+}
+
+.book-title {
+  margin-top: 10px;
+}
+
+.book-authors {
+  color: #999;
+}
+
+.book-top {
+  position: relative;
+  height: 200px;
+  display: flex;
+  align-items: flex-end;
+}
+
+/* book cover */
+
+.book-cover {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  background: #eee;
+  overflow: hidden;
+}
+
+.book-cover-title {
+  padding: 20px 10px 0;
+  text-align: center;
+  font-size: 0.8em;
+}
+
+.your-read {
+  position: absolute;
+  padding: 5px;
+  top: 20px;
+  text-align: center;
+  width: 128px;
+  color: white;
+  font-size: 75%;
+  font-weight: bold;
+  background-color: rgba(255, 140, 0, .75);
+}
