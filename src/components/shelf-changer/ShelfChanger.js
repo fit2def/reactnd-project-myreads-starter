@@ -1,5 +1,5 @@
-import React from 'react'
-import { Bookcase } from '../../LibraryInfo'
+import React from 'react';
+import { Bookcase } from '../../LibraryInfo';
 
 const ShelfChanger = (props) => (
   <div className="book-shelf-changer">
@@ -20,4 +20,4 @@ const ShelfChanger = (props) => (
   </div>
 )
 
-export default ShelfChanger
+export default ShelfChanger;

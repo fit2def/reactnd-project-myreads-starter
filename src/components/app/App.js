@@ -1,47 +1,54 @@
-import React from 'react'
-import { Route } from 'react-router-dom'
-import * as BooksAPI from '../../BooksAPI'
-import MyBooks from '../my-books/MyBooks'
-import Search from '../search/Search'
+import React from 'react';
+import { Route } from 'react-router-dom';
+import * as BooksAPI from '../../BooksAPI';
+import MyBooks from '../my-books/MyBooks';
+import Search from '../search/Search';
+
 
 class BooksApp extends React.Component {
-
-  state = {
-    books: [],
-  }
+  state = { books: [] };
 
   componentDidMount = () => {
     BooksAPI.getAll()
       .then(persistedBooks => {
         this.setState({
           books: persistedBooks
-        })
-      }
-    )
-  }
+        });
+      });
+  };
 
   changeShelf = (book, destinationShelf) => {
-    BooksAPI.update(book, destinationShelf)
-    book.shelf = destinationShelf
-    this.updateLocally(book)
-  }
+    BooksAPI.update(book, destinationShelf);
+    book.shelf = destinationShelf;
+    this.updateLocally(book);
+  };
 
   updateLocally = book => {
     this.setState(prevState => {
-      const idx = prevState.books.map(b => b.id).indexOf(book.id)
-      if(idx !== -1){
-        const leaders = prevState.books.slice(0, idx)
-        const followers = prevState.books.slice(idx + 1, prevState.books.length)
-        return {
-          books: leaders.concat(book).concat(followers)
-        }
-      } else {
-        return {
-          books: prevState.books.concat([book])
-        }
-      }
-    })
-  }
+      const index = prevState.books.map(b => b.id).indexOf(book.id);
+      const updatedBooks = this.getUpdatedBooks(prevState, index, book);
+      return {
+        books: updatedBooks
+      };
+    });
+  };
+
+  getUpdatedBooks = (prevState, index, book) => (
+    index === -1
+      ? this.newBookShelved(prevState, book)
+      : this.bookReplacedAtIndex(prevState, book, index)
+  );
+
+  bookReplacedAtIndex = (prevState, book, index) => {
+    const leaders = prevState.books.slice(0, index);
+    const followers = prevState.books.slice(index + 1, prevState.books.length);
+    return leaders.concat(book).concat(followers);
+  };
+
+  newBookShelved = (prevState, book) => (
+     prevState.books.concat([book])
+  );
+
 
   render() {
     return (
@@ -61,4 +68,4 @@ class BooksApp extends React.Component {
 
 }
 
-export default BooksApp
+export default BooksApp;

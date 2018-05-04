@@ -1,15 +1,19 @@
-import React from 'react'
-import ShelfChanger from '../shelf-changer/ShelfChanger'
+import React from 'react';
+import ShelfChanger from '../shelf-changer/ShelfChanger';
 
 const Book = (props) => (
   <li>
     <div className="book">
       <div className="book-top">
-
         <div
           className="book-cover"
-          style={{ width: 128, height: 193, backgroundImage: `url(${props.book.imageLinks.thumbnail})` }}>
-        {props.book.shelf !== 'none' && <div className="your-read">Your Read</div>}
+          style={{
+              width: 128,
+              height: 193,
+              backgroundImage: props.book.imageLinks? `url(${props.book.imageLinks.thumbnail})` : 'none'
+            }}
+        >
+        {props.book.shelf !== 'none' && <div className="my-read">My Read</div>}
         </div>
         <ShelfChanger
           currentShelf={props.book.shelf}
@@ -22,6 +26,4 @@ const Book = (props) => (
   </li>
 )
 
-
-
-export default Book
+export default Book;
